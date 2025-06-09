@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Apresentação", "01-Apresentação", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.WebApp", "ControleDeBar.WebApp\ControleDeBar.WebApp.csproj", "{DA3DB895-9456-432C-A4F8-B734F8F9B8EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Domínio", "02-Domínio", "{FA33D128-7180-4D19-8FA2-4BA31700494C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Dominio", "ControleDeBar.Dominio\ControleDeBar.Dominio.csproj", "{B1821EAA-22D3-49BD-99F3-3383865887C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Infraestrutura", "03-Infraestrutura", "{9842BF66-DA2E-4910-BA96-0175E1499D01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Infraestrutura.Arquivos", "ControleDeBar.Infraestrutura.Arquivos\ControleDeBar.Infraestrutura.Arquivos.csproj", "{13A0B93D-F05B-4292-A710-F8BA831DF775}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +25,22 @@ Global
 		{DA3DB895-9456-432C-A4F8-B734F8F9B8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA3DB895-9456-432C-A4F8-B734F8F9B8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA3DB895-9456-432C-A4F8-B734F8F9B8EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1821EAA-22D3-49BD-99F3-3383865887C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1821EAA-22D3-49BD-99F3-3383865887C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1821EAA-22D3-49BD-99F3-3383865887C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1821EAA-22D3-49BD-99F3-3383865887C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A0B93D-F05B-4292-A710-F8BA831DF775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A0B93D-F05B-4292-A710-F8BA831DF775}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A0B93D-F05B-4292-A710-F8BA831DF775}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A0B93D-F05B-4292-A710-F8BA831DF775}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DA3DB895-9456-432C-A4F8-B734F8F9B8EF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{B1821EAA-22D3-49BD-99F3-3383865887C5} = {FA33D128-7180-4D19-8FA2-4BA31700494C}
+		{13A0B93D-F05B-4292-A710-F8BA831DF775} = {9842BF66-DA2E-4910-BA96-0175E1499D01}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3F77384-A1A7-43D7-86FA-DC2C0734822D}
