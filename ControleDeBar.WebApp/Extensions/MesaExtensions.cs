@@ -11,7 +11,7 @@ public static class MesaExtensions
             formularioVM.Numero,
             formularioVM.Capacidade);
     }
-    public static DataMesaViewModel ParaDetalhesVM(this Mesa mesa)
+    public static DetalhesMesaViewModel ParaDetalhesVM(this Mesa mesa)
     {
         return new(
             mesa.Id,

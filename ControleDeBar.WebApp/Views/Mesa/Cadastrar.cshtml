@@ -8,16 +8,18 @@
 
 <div class="row justify-content-center my-5">
 	<div class="col-md-8">
-		<div class="card rounder-4 border-0">
+		<div class="card rounded-4 border-0">
 			<div class="card-body p-md-5">
 				<form action="/mesas/cadastrar" method="post">
+					<h3>Formulário de Cadastro</h3>
+
 					<div class="mb-3">
 						<label class="form-label" for="inputNumero">Número:</label>
-						<input class="form-control" id="inputNumero" name="numero" type="number" placeholder="@Model.Numero">
+						<input class="form-control" id="inputNumero" name="numero" type="number" placeholder="Número">
 					</div>	
 					<div class="mb-3">
-						<label class="form-label" for="inputCapacidade">Quantidade de Lugares</label>
-						<input class="form-control" id="inputCapacidade" name="capacidade" type="number" placeholder="@Model.Numero">
+						<label class="form-label" for="inputCapacidade">Capacidade:</label>
+						<input class="form-control" id="inputCapacidade" name="capacidade" type="number" placeholder="Capacidade">
 					</div>	
 					<div class="form-group d-flex align-items-center justify-content-end gap-3 mt-5">
 						<a href="/mesas">Voltar</a>

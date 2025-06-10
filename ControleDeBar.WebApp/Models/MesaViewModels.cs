@@ -24,13 +24,13 @@ public class CadastrarMesaViewModel : FormularioMesaViewModel
 
 public class VisualizarMesasViewModel
 {
-    public List<DataMesaViewModel> Registros { get; } = [];
+    public List<DetalhesMesaViewModel> Registros { get; } = [];
 
     public VisualizarMesasViewModel(List<Mesa> mesas)
     {
         foreach (Mesa m in mesas)
         {
-            DataMesaViewModel dataVM = m.ParaDetalhesVM();
+            DetalhesMesaViewModel dataVM = m.ParaDetalhesVM();
 
             Registros.Add(dataVM);
         }
@@ -45,17 +45,28 @@ public class EditarMesaViewModel : FormularioMesaViewModel
     }
     public EditarMesaViewModel(Guid id, int numero, int capacidade)
     {
-
+        Id = id;
+        Numero = numero;
+        Capacidade = capacidade;
     }
 }
 
-public class DataMesaViewModel
+public class ExcluirMesaViewModel : FormularioMesaViewModel
+{
+    public ExcluirMesaViewModel(Guid id, int numero)
+    {
+        Id = id;
+        Numero = numero;
+    }
+}
+
+public class DetalhesMesaViewModel
 {
     public Guid Id { get; set; }
     public int Numero { get; set; }
     public int Capacidade { get; set; }
 
-    public DataMesaViewModel(Guid id, int numero, int capacidade)
+    public DetalhesMesaViewModel(Guid id, int numero, int capacidade)
     {
         Id = id;
         Numero = numero;

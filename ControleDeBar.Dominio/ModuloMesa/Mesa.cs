@@ -18,6 +18,6 @@ public class Mesa : EntidadeBase<Mesa>
     public override void AtualizarRegistro(Mesa registroEditado)
     {
         Numero = registroEditado.Numero;
-        Capacidade = registroEditado.Numero;
+        Capacidade = registroEditado.Capacidade;
     }
 }

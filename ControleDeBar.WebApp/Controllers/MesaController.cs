@@ -46,4 +46,61 @@ public class MesaController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+
+    [HttpGet("detalhes/{id:guid}")]
+    public ActionResult Detalhes(Guid id)
+    {
+        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id);
+
+        DetalhesMesaViewModel detalhesVM = new(
+            id,
+            mesaSelecionada.Numero,
+            mesaSelecionada.Capacidade
+        );
+
+        return View(detalhesVM);
+    }
+
+    [HttpGet("editar/{id:guid}")]
+    public IActionResult Editar(Guid id)
+    {
+        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id);
+
+        EditarMesaViewModel editarVM = new(
+            mesaSelecionada.Id,
+            mesaSelecionada.Numero,
+            mesaSelecionada.Capacidade);
+
+        return View(editarVM);
+    }
+
+    [HttpPost("editar/{id:guid}")]
+    public IActionResult Editar(Guid id, EditarMesaViewModel editarVM)
+    {
+        Mesa mesaEditada = editarVM.ParaEntidade();
+
+        repositorioMesa.EditarRegistro(id, mesaEditada);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet("excluir/{id:guid}")]
+    public IActionResult Excluir(Guid id)
+    {
+        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id);
+
+        ExcluirMesaViewModel excluirVM = new(
+            id,
+            mesaSelecionada.Numero);
+
+        return View(excluirVM);
+    }
+
+    [HttpPost("excluir/{id:guid}")]
+    public IActionResult ExcluirConfirmado(Guid id)
+    {
+        repositorioMesa.ExcluirRegistro(id);
+
+        return RedirectToAction(nameof(Index));
+    }
 }
