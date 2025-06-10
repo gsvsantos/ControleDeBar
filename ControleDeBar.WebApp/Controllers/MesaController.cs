@@ -22,7 +22,7 @@ public class MesaController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        List<Mesa> mesas = repositorioMesa.SelecionarRegistros();
+        List<Mesa> mesas = repositorioMesa.SelecionarRegistros().OrderBy(m => m.Numero).ToList();
 
         VisualizarMesasViewModel visualizarVM = new(mesas);
 
@@ -38,8 +38,24 @@ public class MesaController : Controller
     }
 
     [HttpPost("cadastrar")]
+    [ValidateAntiForgeryToken]
     public IActionResult Cadastrar(CadastrarMesaViewModel cadastrarVM)
     {
+        foreach (Mesa mesa in repositorioMesa.SelecionarRegistros())
+        {
+            if (mesa.Numero == cadastrarVM.Numero)
+
+            {
+                ModelState.AddModelError("CadastroUnico", "Já existe uma mesa com esse número.");
+                break;
+            }
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return View(cadastrarVM);
+        }
+
         Mesa novaMesa = cadastrarVM.ParaEntidade();
 
         repositorioMesa.CadastrarRegistro(novaMesa);
@@ -75,8 +91,24 @@ public class MesaController : Controller
     }
 
     [HttpPost("editar/{id:guid}")]
+    [ValidateAntiForgeryToken]
     public IActionResult Editar(Guid id, EditarMesaViewModel editarVM)
     {
+        foreach (Mesa mesa in repositorioMesa.SelecionarRegistros())
+        {
+            if (mesa.Id != id && mesa.Numero == editarVM.Numero)
+
+            {
+                ModelState.AddModelError("CadastroUnico", "Já existe uma mesa com esse número.");
+                break;
+            }
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return View(editarVM);
+        }
+
         Mesa mesaEditada = editarVM.ParaEntidade();
 
         repositorioMesa.EditarRegistro(id, mesaEditada);

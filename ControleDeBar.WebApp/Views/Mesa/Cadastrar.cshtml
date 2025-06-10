@@ -8,16 +8,26 @@
 	<div class="col-md-8">
 		<div class="card rounded-4 border-0">
 			<div class="card-body p-md-5">
-				<form action="/mesas/cadastrar" method="post">
+				<form asp-action="Cadastrar" method="post">
 					<h3>Formulário de Cadastro</h3>
 
+					@if (ViewData.ModelState["CadastroUnico"]?.Errors.Count > 0)
+					{
+						<div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+							@ViewData.ModelState["CadastroUnico"]!.Errors.First().ErrorMessage
+						  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					}
+
 					<div class="mb-3">
-						<label class="form-label" for="inputNumero">Número:</label>
-						<input class="form-control" id="inputNumero" name="numero" type="number" placeholder="Número">
+						<label class="form-label" asp-for="Numero">Número:</label>
+						<input class="form-control" id="inputNumero" asp-for="Numero" type="number" placeholder="Número">
+						<span class="text-danger d-block mt-2" asp-validation-for="Numero"></span>
 					</div>	
 					<div class="mb-3">
-						<label class="form-label" for="inputCapacidade">Capacidade:</label>
-						<input class="form-control" id="inputCapacidade" name="capacidade" type="number" placeholder="Capacidade">
+						<label class="form-label" asp-for="Capacidade">Capacidade:</label>
+						<input class="form-control" id="inputCapacidade" asp-for="Capacidade" type="number" placeholder="Capacidade">
+						<span class="text-danger d-block mt-2" asp-validation-for="Capacidade"></span>
 					</div>	
 					<div class="form-group d-flex align-items-center justify-content-end gap-3 mt-5">
 						<a href="/mesas">Voltar</a>
@@ -28,3 +38,6 @@
 		</div>
 	</div>
 </div>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial">
+}
