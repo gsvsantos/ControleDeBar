@@ -1,9 +1,14 @@
-﻿.navbar {
+﻿body {
+    background: #E9ECEF;
+}
+
+.navbar {
     display: none;
 }
 
 .sidebar {
-    background: #ffcccc;
+    background: #FFFFFF;
+    font-weight: bold;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -14,6 +19,10 @@
 .main-content {
     margin-left: 25%;
     width: 75%;
+}
+
+.main-title {
+    font-weight: bold;
 }
 
 .footer {
