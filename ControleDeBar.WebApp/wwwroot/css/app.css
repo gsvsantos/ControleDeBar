@@ -1,0 +1,22 @@
+﻿.navbar {
+    display: none;
+}
+
+.sidebar {
+    background: #ffcccc;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.main-content {
+    margin-left: 25%;
+    width: 75%;
+}
+
+.footer {
+    margin-left: 25%;
+    width: 75%;
+}

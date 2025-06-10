@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="~/lib/bootstrap-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/app.css" />
+    <title>@ViewBag.Titulo - Bar do Zé</title>  
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="flex-shrink-0 p-3 bg-white">
+                    <h3 class="nav-title">Bar do Zé</h3>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Página Inicial</a>
+                        </li>
+                        <li class="nav-item">
+                            <!--Espaço para adicionar os links dos Modulos-->
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="d-flex justify-content-center col-md-9 px-md-4 ms-sm-auto col-lg-10 main-content">
+                <header class="main-title">
+                    <h2>@ViewBag.Titulo</h2>
+                </header>
+                @RenderBody()
+            </main>
+            <footer class="footer text-muted">
+                <div class="container d-flex justify-content-center ">
+                    &copy; 2025 - Bar do Zé - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="~/lib/bootstrap-5.3.6-dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
