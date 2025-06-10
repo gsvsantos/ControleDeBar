@@ -9,7 +9,7 @@ public class ContextoDados
 {
     public List<Mesa> Mesas { get; set; }
     private string pastaArmazenamento = string.Empty;
-    private string arquivoArmazenamento = "dados-gestao-equipamentos.json";
+    private string arquivoArmazenamento = "dados-controle-de-bar.json";
 
     public ContextoDados()
     {
