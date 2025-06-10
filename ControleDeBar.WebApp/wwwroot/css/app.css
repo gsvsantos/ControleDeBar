@@ -2,30 +2,10 @@
     background: #E9ECEF;
 }
 
-.navbar {
-    display: none;
-}
-
 .sidebar {
-    background: #FFFFFF;
-    font-weight: bold;
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
     overflow-y: auto;
-}
-
-.main-content {
-    margin-left: 25%;
-    width: 75%;
-}
-
-.main-title {
-    font-weight: bold;
-}
-
-.footer {
-    margin-left: 25%;
-    width: 75%;
 }
