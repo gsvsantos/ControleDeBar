@@ -1,18 +1,19 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ControleDeBar.Dominio.ModuloMesa;
 
 namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
 
 public class ContextoDados
 {
+    public List<Mesa> Mesas { get; set; }
     private string pastaArmazenamento = string.Empty;
     private string arquivoArmazenamento = "dados-gestao-equipamentos.json";
-    //Espaço para variáveis das listas conforme os Módulos forem feitos.
 
     public ContextoDados()
     {
-        //Espaço para inicialização das listas conforme os Módulos forem feitos.
+        Mesas = new List<Mesa>();
     }
 
     public void VerificarSistemaOperacional()
@@ -67,6 +68,7 @@ public class ContextoDados
         ContextoDados contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(json, jsonOptions)!;
 
         if (contextoArmazenado == null) return;
-        //Espaço para reatribuição das listas conforme os Módulos forem feitos.
+
+        Mesas = contextoArmazenado.Mesas;
     }
 }
