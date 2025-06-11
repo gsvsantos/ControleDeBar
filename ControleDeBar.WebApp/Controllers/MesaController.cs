@@ -71,8 +71,7 @@ public class MesaController : Controller
         DetalhesMesaViewModel detalhesVM = new(
             id,
             mesaSelecionada.Numero,
-            mesaSelecionada.Capacidade
-        );
+            mesaSelecionada.Capacidade);
 
         return View(detalhesVM);
     }
