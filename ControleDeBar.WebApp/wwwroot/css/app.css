@@ -1,11 +1,20 @@
-﻿body {
+﻿html, body {
+    height: 100%;
+    margin: 0;
     background: #E9ECEF;
 }
 
 .sidebar {
     height: 100vh;
-    position: fixed;
     top: 0;
     left: 0;
     overflow-y: auto;
+}
+
+.footer {
+    border-top: none;
+    background: #dee2e6;
+    color: #495057;
+    padding: 15px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
 }

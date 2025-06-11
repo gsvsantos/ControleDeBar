@@ -19,9 +19,7 @@ public abstract class FormularioMesaViewModel
 
 public class CadastrarMesaViewModel : FormularioMesaViewModel
 {
-    public CadastrarMesaViewModel()
-    {
-    }
+    public CadastrarMesaViewModel() { }
     public CadastrarMesaViewModel(int numero, int capacidade) : this()
     {
         Numero = numero;
@@ -46,10 +44,7 @@ public class VisualizarMesasViewModel
 
 public class EditarMesaViewModel : FormularioMesaViewModel
 {
-    public EditarMesaViewModel()
-    {
-
-    }
+    public EditarMesaViewModel() { }
     public EditarMesaViewModel(Guid id, int numero, int capacidade)
     {
         Id = id;
