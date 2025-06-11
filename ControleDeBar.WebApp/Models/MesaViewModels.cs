@@ -35,9 +35,9 @@ public class VisualizarMesasViewModel
     {
         foreach (Mesa m in mesas)
         {
-            DetalhesMesaViewModel dataVM = m.ParaDetalhesVM();
+            DetalhesMesaViewModel detalhesVM = m.ParaDetalhesVM();
 
-            Registros.Add(dataVM);
+            Registros.Add(detalhesVM);
         }
     }
 }
@@ -55,6 +55,7 @@ public class EditarMesaViewModel : FormularioMesaViewModel
 
 public class ExcluirMesaViewModel : FormularioMesaViewModel
 {
+    public ExcluirMesaViewModel() { }
     public ExcluirMesaViewModel(Guid id, int numero)
     {
         Id = id;
