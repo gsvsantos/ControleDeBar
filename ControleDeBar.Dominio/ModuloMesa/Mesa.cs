@@ -8,7 +8,6 @@ public class Mesa : EntidadeBase<Mesa>
     public int Capacidade { get; set; }
 
     public Mesa() { }
-
     public Mesa(int numero, int capacidade) : this()
     {
         Numero = numero;
