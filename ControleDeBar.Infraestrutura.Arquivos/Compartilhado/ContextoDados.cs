@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloMesa;
 
 namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
@@ -8,12 +9,14 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
 public class ContextoDados
 {
     public List<Mesa> Mesas { get; set; }
+    public List<Garcom> Garcons { get; set; }
     private string pastaArmazenamento = string.Empty;
     private string arquivoArmazenamento = "dados-controle-de-bar.json";
 
     public ContextoDados()
     {
         Mesas = new List<Mesa>();
+        Garcons = new List<Garcom>();
     }
 
     public void VerificarSistemaOperacional()
@@ -70,5 +73,6 @@ public class ContextoDados
         if (contextoArmazenado == null) return;
 
         Mesas = contextoArmazenado.Mesas;
+        Garcons = contextoArmazenado.Garcons;
     }
 }
