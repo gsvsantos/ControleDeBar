@@ -4,27 +4,25 @@
     ViewBag.Titulo = "Detalhes do Produto";
 }
 
-<div class="row justify-content-center mx-0 my-5">
-    <div class="col-md-8">
-        <div class="card rounded-4 border-0">
-            <div class="card-body p-md-5">
-                <h3>Detalhes</h3>
+<div class="container-fluid my-5 px-4">
+    <div class="card rounded-4 border-0">
+        <div class="card-body p-md-5">
+            <h3>Detalhes</h3>
 
-                <div class="form-group d-grid gap-2 mt-3">
-                    <label for="id" class="control-label fs-5">Id:</label>
-                    <input name="id" class="form-control" value="@Model.Id.ToString().Substring(0, 13)..." readonly disabled />
-                </div>
-                <div class="form-group d-grid gap-2 mt-3">
-                    <label for="nome" class="control-label fs-5">Nome:</label>
-                    <input name="nome" class="form-control" type="text" value="@Model.Nome" readonly disabled />
-                </div>
-                <div class="form-group d-grid gap-2 mt-3">
-                    <label for="preco" class="control-label fs-5">Preço:</label>
-                    <input name="preco" class="form-control" type="text" value="R$ @Model.Preco" readonly disabled />
-                </div>
-                <div class="form-group d-flex align-items-center justify-content-end gap-3 mt-5">
-                    <a href="/produtos">Voltar</a>
-                </div>
+            <div class="form-group d-grid gap-2 mt-3">
+                <label for="id" class="control-label fs-5">Id:</label>
+                <input name="id" class="form-control" value="@Model.Id.ToString().Substring(0, 13)..." readonly disabled />
+            </div>
+            <div class="form-group d-grid gap-2 mt-3">
+                <label for="nome" class="control-label fs-5">Nome:</label>
+                <input name="nome" class="form-control" type="text" value="@Model.Nome" readonly disabled />
+            </div>
+            <div class="form-group d-grid gap-2 mt-3">
+                <label for="preco" class="control-label fs-5">Preço:</label>
+                <input name="preco" class="form-control" type="text" value="R$ @Model.Preco" readonly disabled />
+            </div>
+            <div class="form-group d-flex flex-column align-items-center justify-content-end gap-3 mt-5">
+                <a href="/produtos">Voltar</a>
             </div>
         </div>
     </div>
