@@ -9,41 +9,25 @@
     <title>@ViewBag.Titulo - Bar do Zé</title>  
 </head>
 <body>
-    <div class="wrapper d-flex flex-column min-vh-100">
-        <div class="row flex-grow-1 mx-0">
-            <nav class="col-lg-2 bg-white sidebar">
-                <div class="p-3">
-                    <h3 class="nav-title">Bar do Zé</h3>
-                    <ul class="nav flex-column gap-2 ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-primary fw-semibold" href="/">Página Inicial</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary fw-semibold" href="/mesas">Mesas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary fw-semibold" href="/garcons">Garçons</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="col main-content-wrapper d-flex flex-column flex-grow-1 px-0">
-                <header class="main-title d-flex justify-content-center my-4">
-                    <h2>@ViewBag.Titulo</h2>
-                </header>
-                <main role="main" class="main-content flex-grow-1">
-                    @RenderBody()
-                </main>
-                <footer class="footer mt-auto text-muted">
-                    <div class="container d-flex justify-content-center">
-                        <span>&copy; 2025 - Bar do Zé</span>
-                    </div>
-                </footer>
+    <div class="wrapper">
+        <partial name="_SideBar">
+        <div class="main">
+        <header class="main-title p-4">
+            <h2>@ViewBag.Titulo</h2>
+        </header>
+        <main role="main" class="main-content p-4">
+            @RenderBody()
+        </main>
+        <footer class="footer">
+            <div class="container-fluid">
+                <span>&copy; @DateTime.Now.Year | Bar do Zé</span>
             </div>
+        </footer>
         </div>
     </div>
     <script src="~/lib/bootstrap-dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="~/js/script.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
