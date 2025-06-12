@@ -4,27 +4,25 @@
     ViewBag.Titulo = "Detalhes da Mesa";
 }
 
-<div class="row justify-content-center mx-0 my-5">
-    <div class="col-md-8">
-        <div class="card rounded-4 border-0">
-            <div class="card-body p-md-5">
-                <h3>Detalhes</h3>
+<div class="container-fluid my-5 px-4">
+    <div class="card rounded-4 border-0">
+        <div class="card-body p-md-5">
+            <h3>Detalhes</h3>
 
-                <div class="form-group d-grid gap-2 mt-3">
-                    <label for="id" class="control-label fs-5">Id:</label>
-                    <input name="id" class="form-control" value="@Model.Id.ToString().Substring(0, 13)..." readonly disabled />
-                </div>
-                <div class="form-group d-grid gap-2 mt-3">
-                    <label for="numero" class="control-label fs-5">Número:</label>
-                    <input name="numero" class="form-control" type="number" value="@Model.Numero" readonly disabled />
-                </div>
-                <div class="form-group d-grid gap-2 mt-3">
-                    <label for="capacidade" class="control-label fs-5">Capacidade:</label>
-                    <input name="capacidade" class="form-control" type="number" value="@Model.Capacidade" readonly disabled />
-                </div>
-                <div class="form-group d-flex align-items-center justify-content-end gap-3 mt-5">
-                    <a href="/mesas">Voltar</a>
-                </div>
+            <div class="form-group d-grid gap-2 mt-3">
+                <label for="id" class="control-label fs-5">Id:</label>
+                <input name="id" class="form-control" value="@Model.Id.ToString().Substring(0, 13)..." readonly disabled />
+            </div>
+            <div class="form-group d-grid gap-2 mt-3">
+                <label for="numero" class="control-label fs-5">Número:</label>
+                <input name="numero" class="form-control" type="number" value="@Model.Numero" readonly disabled />
+            </div>
+            <div class="form-group d-grid gap-2 mt-3">
+                <label for="capacidade" class="control-label fs-5">Capacidade:</label>
+                <input name="capacidade" class="form-control" type="number" value="@Model.Capacidade" readonly disabled />
+            </div>
+            <div class="form-group d-flex flex-column align-items-center justify-content-end gap-3 mt-5">
+                <a href="/mesas">Voltar</a>
             </div>
         </div>
     </div>
