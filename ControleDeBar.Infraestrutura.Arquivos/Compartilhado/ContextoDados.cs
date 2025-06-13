@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.Dominio.ModuloProduto;
@@ -12,6 +13,7 @@ public class ContextoDados
     public List<Mesa> Mesas { get; set; }
     public List<Garcom> Garcons { get; set; }
     public List<Produto> Produtos { get; set; }
+    public List<Conta> Contas { get; set; }
     private string pastaArmazenamento = string.Empty;
     private string arquivoArmazenamento = "dados-controle-de-bar.json";
 
@@ -20,6 +22,7 @@ public class ContextoDados
         Mesas = new List<Mesa>();
         Garcons = new List<Garcom>();
         Produtos = new List<Produto>();
+        Contas = new List<Conta>();
     }
 
     public void VerificarSistemaOperacional()
@@ -78,5 +81,6 @@ public class ContextoDados
         Mesas = contextoArmazenado.Mesas;
         Garcons = contextoArmazenado.Garcons;
         Produtos = contextoArmazenado.Produtos;
+        Contas = contextoArmazenado.Contas;
     }
 }
