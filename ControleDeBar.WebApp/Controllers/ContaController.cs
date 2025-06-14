@@ -98,7 +98,8 @@ public class ContaController : Controller
             contaSelecionada.Titular,
             contaSelecionada.Mesa.Numero,
             contaSelecionada.Garcom.Nome,
-            contaSelecionada.CalcularValorTotal());
+            contaSelecionada.CalcularValorTotal(),
+            contaSelecionada.Pedidos);
 
         return View(fecharContaVM);
     }
@@ -165,5 +166,18 @@ public class ContaController : Controller
             produtos);
 
         return View("GerenciarPedidos", gerenciarPedidosVm);
+    }
+
+    [HttpGet("faturamento")]
+    public IActionResult Faturamento(DateTime? data)
+    {
+        if (!data.HasValue)
+            return View();
+
+        List<Conta> contas = repositorioConta.SelecionarContasPeriodo(data.GetValueOrDefault());
+
+        FaturamentoViewModel faturamentoVM = new(contas);
+
+        return View(faturamentoVM);
     }
 }

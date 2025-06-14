@@ -8,4 +8,5 @@ public interface IRepositorioConta : IRepositorio<Conta>
     Conta SelecionarPorId(Guid idRegistro);
     List<Conta> SelecionarContasAbertas();
     List<Conta> SelecionarContasFechadas();
+    List<Conta> SelecionarContasPeriodo(DateTime data);
 }

@@ -5,59 +5,68 @@
 }
 
 <div class="container-fluid my-5 px-4">
-<div class="d-grid d-lg-flex flex-wrap gap-2 align-items-center">
-    <a class="btn btn-primary px-5" asp-action="Abrir"> 
-        <i class="bi bi-plus"></i>
-        Abrir Conta
-    </a>
-    <div class="ms-lg-auto d-grid d-lg-flex flex-wrap gap-2">
-        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-garcomId="@Model.GarcomId">
-            <i class="bi bi-list"></i>
-            Todas as contas
+    <div class="d-grid d-lg-flex flex-wrap gap-2 align-items-center">
+        <a class="btn btn-primary px-5" asp-action="Abrir"> 
+            <i class="bi bi-plus"></i>
+            Abrir Conta
         </a>
-        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-status="abertas" asp-route-garcomId="@Model.GarcomId">
-            <i class="bi bi-cart"></i>
-            Contas abertas
+        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Faturamento">
+            <i class="bi bi-clipboard-data"></i>
+            Faturamento Diário
         </a>
-        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-status="fechadas" asp-route-garcomId="@Model.GarcomId">
-            <i class="bi bi-cart-check"></i>
-            Contas fechadas
-        </a>
-    </div>
-        <form asp-action="Index" method="get">
+        <div class="ms-lg-auto d-grid d-lg-flex flex-wrap gap-2">
+            <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-garcomId="@Model.GarcomId">
+                <i class="bi bi-list"></i>
+                Todas as contas
+            </a>
+            <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-status="abertas" asp-route-garcomId="@Model.GarcomId">
+                <i class="bi bi-cart"></i>
+                Contas abertas
+            </a>
+            <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-status="fechadas" asp-route-garcomId="@Model.GarcomId">
+                <i class="bi bi-cart-check"></i>
+                Contas fechadas
+            </a>
+        </div>
+        <form class="ms-auto" asp-action="Index" method="get">
             <input type="hidden" name="status" value="@Model.Status"/>
-            <div class="form-group gap-2 mt-3">
-                <label asp-for="GarcomId" class="control-label fs-5">Garçom:</label>
+            <div class="form-group d-flex gap-2">
+                <label asp-for="GarcomId" class="control-label fs-5"><strong>Garçom:</strong></label>
                 <select asp-for="GarcomId" asp-items="@Model.GarconsDisponiveis" class="form-select" selected="@Model.GarcomId"></select>
                 <span asp-validation-for="GarcomId" class="text-danger"></span>
-                <button type="submit" class="btn btn-primary rounded-3 px-5">Filtrar</button>
+                <button type="submit" class="btn btn-primary rounded-3 px-5">Selecionar Garçom</button>
             </div>
         </form>
         <a href="/contas" class="btn btn-secondary px-3">
             <i class="bi bi-x-circle"></i>
             Limpar Filtros
         </a>
-</div>
+    </div>
 
-<hr />
+    <hr />
 
-<div class="d-flex flex-wrap gap-2">
-    @foreach (var item in Model.Registros)
-    {
+    <div class="d-flex flex-wrap gap-2">
+        @foreach (DetalhesContaViewModel conta in Model.Registros)
+        {
         <div class="col-12 col-md-4 col-lg-3 mb-3 coluna-card">
             <div class="card rounded-4 border-0">
                 <div class="card-body d-flex flex-column" style="min-height: 220px;max-height: 250px;">
-                <h5 class="card-title">Titular: @item.Titular</h5>
-                <p class="card-text mb-1"><span class="fw-semibold">Mesa:</span> @item.Mesa</p>
-                <p class="card-text"><span class="fw-semibold">Garçom:</span> @item.Garcom</p>
-                <p class="card-text"><span class="fw-semibold">Status:</span> @(@item.EstaAberta ? "Aberta" : "Fechada")</p>
-                @if (item.EstaAberta)
+                <p class="card-text mb-1"><span class="fw-semibold">Titular:</span> @conta.Titular</p>
+                <p class="card-text mb-1"><span class="fw-semibold">Abertura:</span> @conta.Abertura</p>
+                @if (!conta.EstaAberta)
+                {
+                    <p class="card-text mb-1"><span class="fw-semibold">Fechamento:</span> @conta.Fechamento</p>
+                }
+                <p class="card-text mb-1"><span class="fw-semibold">Mesa:</span> @conta.Mesa</p>
+                <p class="card-text"><span class="fw-semibold">Garçom:</span> @conta.Garcom</p>
+                <p class="card-text"><span class="fw-semibold">Status:</span> @(conta.EstaAberta ? "Aberta" : "Fechada")</p>
+                @if (conta.EstaAberta)
                 {
                     <span class="d-flex gap-1 justify-content-end">
-                        <a title="Gerenciar pedidos" asp-action="GerenciarPedidos" asp-route-id="@item.Id" class="btn btn-primary rounded-circle opcao-card">
+                        <a title="Gerenciar pedidos" asp-action="GerenciarPedidos" asp-route-id="@conta.Id" class="btn btn-primary rounded-circle opcao-card">
                             <i class="bi bi-cart"></i>
                         </a>
-                        <a title="Fechar conta" asp-action="Fechar" asp-route-id="@item.Id" class="btn btn-success rounded-circle opcao-card">
+                        <a title="Fechar conta" asp-action="Fechar" asp-route-id="@conta.Id" class="btn btn-success rounded-circle opcao-card">
                             <i class="bi bi-cash-coin"></i>
                         </a>
                     </span>

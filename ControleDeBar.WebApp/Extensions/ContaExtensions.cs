@@ -38,6 +38,8 @@ public static class ContaExtensions
                 conta.Titular,
                 conta.Mesa.Numero,
                 conta.Garcom.Nome,
+                conta.Abertura,
+                conta.Fechamento,
                 conta.EstaAberta,
                 conta.CalcularValorTotal(),
                 conta.Pedidos);

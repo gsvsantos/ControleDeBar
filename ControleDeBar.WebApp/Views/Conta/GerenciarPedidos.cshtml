@@ -30,7 +30,7 @@
                     <label class="control-label">Produto: </label>
 
                     <select class="form-select w-100" name="IdProduto">
-                        @foreach (var produto in Model.Produtos)
+                        @foreach (SelectListItem produto in Model.Produtos)
                         {
                             <option value="@produto.Value">@produto.Text</option>
                         }
@@ -63,15 +63,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var pedido in Model.Conta.Pedidos)
+                        @foreach (PedidoContaViewModel p in Model.Conta.Pedidos)
                         {
                             <tr>
-                                <td>@pedido.Produto</td>
-                                <td>@pedido.QuantidadeSolicitada</td>
-                                <td>@pedido.TotalParcial.ToString("C2")</td>
+                                <td>@p.Produto</td>
+                                <td>@p.QuantidadeSolicitada</td>
+                                <td>@p.TotalParcial.ToString("F2")</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-2">
-                                        <form action="/contas/@Model.Conta.Id/remover-pedido/@pedido.Id" method="post">
+                                        <form action="/contas/@Model.Conta.Id/remover-pedido/@p.Id" method="post">
                                             <button class="btn btn-sm btn-danger" title="Remover">
                                                 <i class="bi bi-trash3"></i>
                                             </button>

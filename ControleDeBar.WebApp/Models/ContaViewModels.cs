@@ -27,20 +27,20 @@ public class AbrirContaViewModel
     {
         foreach (Mesa m in mesas)
         {
-            SelectListItem mesaDisponivel = new(
-                m.Numero.ToString(),
-               m.Id.ToString());
-
-            MesasDisponiveis.Add(mesaDisponivel);
+            MesasDisponiveis.Add(new SelectListItem
+            {
+                Text = m.Numero.ToString(),
+                Value = m.Id.ToString(),
+            });
         }
 
         foreach (Garcom g in garcons)
         {
-            SelectListItem nomeDisponivel = new(
-                g.Nome,
-                g.Id.ToString());
-
-            GarconsDisponiveis.Add(nomeDisponivel);
+            GarconsDisponiveis.Add(new SelectListItem
+            {
+                Text = g.Nome,
+                Value = g.Id.ToString(),
+            });
         }
     }
 }
@@ -52,15 +52,17 @@ public class FecharContaViewModel
     public int Mesa { get; set; }
     public string Garcom { get; set; } = string.Empty;
     public decimal ValorTotal { get; set; }
+    public List<Pedido> Pedidos { get; set; } = [];
 
     public FecharContaViewModel() { }
-    public FecharContaViewModel(Guid id, string titular, int mesa, string garcom, decimal valorTotal)
+    public FecharContaViewModel(Guid id, string titular, int mesa, string garcom, decimal valorTotal, List<Pedido> pedidos)
     {
         Id = id;
         Titular = titular;
         Mesa = mesa;
         Garcom = garcom;
         ValorTotal = valorTotal;
+        Pedidos.AddRange(pedidos);
     }
 }
 
@@ -97,16 +99,20 @@ public class DetalhesContaViewModel
     public string Titular { get; set; }
     public int Mesa { get; set; }
     public string Garcom { get; set; }
+    public DateTime Abertura { get; set; }
+    public DateTime Fechamento { get; set; }
     public bool EstaAberta { get; set; }
     public decimal ValorTotal { get; set; }
     public List<PedidoContaViewModel> Pedidos { get; set; } = [];
 
-    public DetalhesContaViewModel(Guid id, string titular, int mesa, string garcom, bool estaAberta, decimal valorTotal, List<Pedido> pedidos)
+    public DetalhesContaViewModel(Guid id, string titular, int mesa, string garcom, DateTime abertura, DateTime fechamento, bool estaAberta, decimal valorTotal, List<Pedido> pedidos)
     {
         Id = id;
         Titular = titular;
         Mesa = mesa;
         Garcom = garcom;
+        Abertura = abertura;
+        Fechamento = fechamento;
         EstaAberta = estaAberta;
         ValorTotal = valorTotal;
 
@@ -165,4 +171,20 @@ public class AdicionarPedidoViewModel
 {
     public Guid IdProduto { get; set; }
     public int QuantidadeSolicitada { get; set; }
+}
+
+public class FaturamentoViewModel
+{
+    public List<DetalhesContaViewModel> Registros { get; set; } = [];
+    public decimal Total { get; set; }
+
+    public FaturamentoViewModel(List<Conta> contas)
+    {
+        foreach (Conta c in contas)
+        {
+            Total += c.CalcularValorTotal();
+
+            Registros.Add(c.ParaDetalhesVM());
+        }
+    }
 }

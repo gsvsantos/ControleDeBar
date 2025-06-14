@@ -55,4 +55,17 @@ public class RepositorioContaEmArquivo : RepositorioBaseEmArquivo<Conta>, IRepos
     {
         return contexto.Contas;
     }
+
+    public List<Conta> SelecionarContasPeriodo(DateTime data)
+    {
+        List<Conta> contasPeriodo = [];
+
+        foreach (Conta c in registros)
+        {
+            if (c.Fechamento.Date == data.Date)
+                contasPeriodo.Add(c);
+        }
+
+        return contasPeriodo;
+    }
 }
