@@ -25,12 +25,6 @@ public class RepositorioContaEmArquivo : RepositorioBaseEmArquivo<Conta>, IRepos
         return null!;
     }
 
-
-    public List<Conta> SelecionarContas()
-    {
-        return registros;
-    }
-
     public List<Conta> SelecionarContasAbertas()
     {
         List<Conta> contasAbertas = [];

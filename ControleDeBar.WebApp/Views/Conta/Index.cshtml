@@ -11,19 +11,32 @@
         Abrir Conta
     </a>
     <div class="ms-lg-auto d-grid d-lg-flex flex-wrap gap-2">
-        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index">
+        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-garcomId="@Model.GarcomId">
             <i class="bi bi-list"></i>
             Todas as contas
         </a>
-        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-status="abertas">
+        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-status="abertas" asp-route-garcomId="@Model.GarcomId">
             <i class="bi bi-cart"></i>
             Contas abertas
         </a>
-        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-status="fechadas">
+        <a class="btn btn-outline-primary px-3 btn-filtro" asp-action="Index" asp-route-status="fechadas" asp-route-garcomId="@Model.GarcomId">
             <i class="bi bi-cart-check"></i>
             Contas fechadas
         </a>
     </div>
+        <form asp-action="Index" method="get">
+            <input type="hidden" name="status" value="@Model.Status"/>
+            <div class="form-group gap-2 mt-3">
+                <label asp-for="GarcomId" class="control-label fs-5">Garçom:</label>
+                <select asp-for="GarcomId" asp-items="@Model.GarconsDisponiveis" class="form-select" selected="@Model.GarcomId"></select>
+                <span asp-validation-for="GarcomId" class="text-danger"></span>
+                <button type="submit" class="btn btn-primary rounded-3 px-5">Filtrar</button>
+            </div>
+        </form>
+        <a href="/contas" class="btn btn-secondary px-3">
+            <i class="bi bi-x-circle"></i>
+            Limpar Filtros
+        </a>
 </div>
 
 <hr />

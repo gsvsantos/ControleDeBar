@@ -32,18 +32,21 @@ public class ContaController : Controller
     }
 
     [HttpGet]
-    public IActionResult Index(string status)
+    public IActionResult Index(string status, Guid? garcomId)
     {
-        List<Conta> registros;
-
-        switch (status)
+        List<Conta> contas = status switch
         {
-            case "abertas": registros = repositorioConta.SelecionarContasAbertas(); break;
-            case "fechadas": registros = repositorioConta.SelecionarContasFechadas(); break;
-            default: registros = repositorioConta.SelecionarContas(); break;
-        }
+            "abertas" => repositorioConta.SelecionarContasAbertas(),
+            "fechadas" => repositorioConta.SelecionarContasFechadas(),
+            _ => repositorioConta.SelecionarRegistros(),
+        };
 
-        VisualizarContasViewModel visualizarVM = new(registros);
+        if (garcomId.HasValue)
+            contas = [.. contas.Where(c => c.Garcom.Id == garcomId.Value)];
+
+        List<Garcom> garcons = repositorioGarcom.SelecionarRegistros();
+
+        VisualizarContasViewModel visualizarVM = new(contas, garcons, status, garcomId);
 
         return View(visualizarVM);
     }
@@ -63,7 +66,7 @@ public class ContaController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Abrir(AbrirContaViewModel abrirVM)
     {
-        foreach (Conta c in repositorioConta.SelecionarContas())
+        foreach (Conta c in repositorioConta.SelecionarRegistros())
         {
             if (c.Titular.Equals(abrirVM.Titular) && c.EstaAberta)
             {

@@ -6,7 +6,7 @@ namespace ControleDeBar.Dominio.ModuloConta;
 public class Pedido
 {
     public Guid Id { get; set; }
-    public Produto Produto { get; set; }
+    public Produto Produto { get; set; } = null!;
     public int QuantidadeSolicitada { get; set; }
 
     [ExcludeFromCodeCoverage]
