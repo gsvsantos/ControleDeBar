@@ -63,19 +63,6 @@ public class ProdutoController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    [HttpGet("detalhes/{id:guid}")]
-    public ActionResult Detalhes(Guid id)
-    {
-        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id);
-
-        DetalhesProdutoViewModel detalhesVM = new(
-            id,
-            produtoSelecionado.Nome,
-            produtoSelecionado.Preco);
-
-        return View(detalhesVM);
-    }
-
     [HttpGet("editar/{id:guid}")]
     public IActionResult Editar(Guid id)
     {

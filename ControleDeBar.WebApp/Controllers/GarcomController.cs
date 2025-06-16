@@ -60,19 +60,6 @@ public class GarcomController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    [HttpGet("detalhes/{id:guid}")]
-    public IActionResult Detalhes(Guid id)
-    {
-        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id);
-
-        DetalhesGarcomViewModel detalhesVM = new(
-            garcomSelecionado.Id,
-            garcomSelecionado.Nome,
-            garcomSelecionado.CPF);
-
-        return View(detalhesVM);
-    }
-
     [HttpGet("editar/{id:guid}")]
     public IActionResult Editar(Guid id)
     {
