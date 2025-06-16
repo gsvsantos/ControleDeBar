@@ -17,7 +17,10 @@
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 				}
-
+				<div class="mb-3">
+					<label for="id" class="control-label fs-5">Id:</label>
+					<input name="id" class="form-control" value="@Model.Id" readonly disabled />
+				</div>
 				<div class="mb-3">
 					<label class="form-label" asp-for="Nome">Nome:</label>
 					<input class="form-control" id="inputNome" asp-for="Nome" type="text" placeholder="Nome">
@@ -29,7 +32,7 @@
 					<span class="text-danger d-block mt-2" asp-validation-for="Preco"></span>
 				</div>	
 				<div class="form-group d-flex flex-column align-items-center justify-content-end gap-3 mt-5">
-					<a href="/produtos">Cancelar</a>
+					<a href="/produtos" class="btn btn-outline-primary rounded-3 px-2">Cancelar</a>
 					<button type="submit" class="btn btn-primary rounded-4 px-5">Confirmar</button>
 				</div>
 			</form>
@@ -42,16 +45,13 @@
 		const inputPreco = document.getElementById('inputPreco');
 
 		inputPreco.addEventListener('input', function(event) {
-			// Ensure only numbers and a single decimal point are allowed
 			this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
-			// Limit to two decimal places
 			if (this.value.indexOf('.') !== -1 && this.value.split('.')[1].length > 2) {
 			this.value = parseFloat(this.value).toFixed(2);
 			}
 		});
 
 		inputPreco.addEventListener('blur', function(event) {
-			// Format the number to two decimal places when the input loses focus
 			if (this.value) {
 				this.value = parseFloat(this.value).toFixed(2);
 			}

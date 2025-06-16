@@ -1,5 +1,7 @@
-﻿using ControleDeBar.Dominio.ModuloMesa;
+﻿using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
+using ControleDeBar.Infraestrutura.Arquivos.ModuloConta;
 using ControleDeBar.Infraestrutura.Arquivos.ModuloMesa;
 using ControleDeBar.WebApp.Extensions;
 using ControleDeBar.WebApp.Models;
@@ -11,11 +13,13 @@ namespace ControleDeBar.WebApp.Controllers;
 public class MesaController : Controller
 {
     private readonly ContextoDados contextoDados;
+    private readonly IRepositorioConta repositorioConta;
     private readonly IRepositorioMesa repositorioMesa;
 
     public MesaController()
     {
         contextoDados = new(true);
+        repositorioConta = new RepositorioContaEmArquivo(contextoDados);
         repositorioMesa = new RepositorioMesaEmArquivo(contextoDados);
     }
 
@@ -67,11 +71,13 @@ public class MesaController : Controller
     public ActionResult Detalhes(Guid id)
     {
         Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id);
+        List<Conta> contas = repositorioConta.SelecionarRegistros();
 
         DetalhesMesaViewModel detalhesVM = new(
             id,
             mesaSelecionada.Numero,
-            mesaSelecionada.Capacidade);
+            mesaSelecionada.Capacidade,
+            contas);
 
         return View(detalhesVM);
     }

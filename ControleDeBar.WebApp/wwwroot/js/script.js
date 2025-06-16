@@ -2,11 +2,14 @@ const hamburguer = document.querySelector('.toggle-btn');
 const toggler = document.querySelector('.toggle-btn-icon');
 var x = window.matchMedia("(max-width: 992px)")
 
+// sidebarShow
 function sidebarToggler() {
     document.querySelector('.sidebar').classList.toggle('expand');
     toggler.classList.toggle('bi-chevron-double-left');
     toggler.classList.toggle('bi-chevron-double-right');
 }
+
+//new function sidebarHide
 
 hamburguer.addEventListener('click', sidebarToggler);
 

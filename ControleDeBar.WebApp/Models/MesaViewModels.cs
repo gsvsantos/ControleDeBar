@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.WebApp.Extensions;
 
@@ -68,11 +69,22 @@ public class DetalhesMesaViewModel
     public Guid Id { get; set; }
     public int Numero { get; set; }
     public int Capacidade { get; set; }
+    public List<DetalhesContaViewModel> Registros { get; set; } = [];
+    public decimal Total { get; set; }
 
     public DetalhesMesaViewModel(Guid id, int numero, int capacidade)
     {
         Id = id;
         Numero = numero;
         Capacidade = capacidade;
+    }
+    public DetalhesMesaViewModel(Guid id, int numero, int capacidade, List<Conta> contas) : this(id, numero, capacidade)
+    {
+        foreach (Conta c in contas)
+        {
+            Total += c.CalcularValorTotal();
+
+            Registros.Add(c.ParaDetalhesVM());
+        }
     }
 }
