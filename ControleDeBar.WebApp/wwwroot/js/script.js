@@ -1,20 +1,31 @@
 const hamburguer = document.querySelector('.toggle-btn');
 const toggler = document.querySelector('.toggle-btn-icon');
-var x = window.matchMedia("(max-width: 992px)")
+var minWidth = window.matchMedia("(min-width: 1200px)")
+console.log(minWidth);
 
-// sidebarShow
-function sidebarToggler() {
+function sidebarShow() {
     document.querySelector('.sidebar').classList.toggle('expand');
     toggler.classList.toggle('bi-chevron-double-left');
     toggler.classList.toggle('bi-chevron-double-right');
 }
 
-//new function sidebarHide
+function sidebarHide() {
+    document.querySelector('.sidebar').classList.remove('expand');
+}
 
-hamburguer.addEventListener('click', sidebarToggler);
+if (!minWidth.matches) {
+    sidebarHide();
+}
+else {
+    hamburguer.addEventListener('click', sidebarShow);
+}
 
-sidebarToggler(x);
-
-x.addEventListener("change", function () {
-    sidebarToggler(x);
-});
+minWidth.onchange = (e) => {
+    if (!e.matches) {
+        sidebarHide();
+    }
+    else {
+        sidebarShow()
+        hamburguer.addEventListener('click', sidebarShow);
+    }
+}
