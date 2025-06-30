@@ -28,6 +28,18 @@ html, body {
     border-color: var(--cor-primaria);
 }
 
+.btn-outline-primary {
+    background-color: transparent;
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+}
+
+.btn-outline-primary:hover {
+    filter: brightness(0.9);
+    background-color: var(--cor-primaria);
+    border-color: var(--cor-primaria);
+}
+
 .btn-warning {
     background-color: var(--cor-destaque);
     border-color: var(--cor-destaque);
