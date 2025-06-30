@@ -1,3 +1,5 @@
+using ControleDeBar.WebApp.ActionFilters;
+
 namespace ControleDeBar.WebApp
 {
 #pragma warning disable RCS1102 // Make class static
@@ -7,7 +9,10 @@ namespace ControleDeBar.WebApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews((options) =>
+            {
+                options.Filters.Add<LogarAcaoAttribute>();
+            });
 
             var app = builder.Build();
             app.UseStaticFiles();
