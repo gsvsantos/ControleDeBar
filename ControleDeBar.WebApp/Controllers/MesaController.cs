@@ -1,8 +1,5 @@
 ﻿using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloMesa;
-using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
-using ControleDeBar.Infraestrutura.Arquivos.ModuloConta;
-using ControleDeBar.Infraestrutura.Arquivos.ModuloMesa;
 using ControleDeBar.WebApp.Extensions;
 using ControleDeBar.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,15 +9,13 @@ namespace ControleDeBar.WebApp.Controllers;
 [Route("mesas")]
 public class MesaController : Controller
 {
-    private readonly ContextoDados contextoDados;
     private readonly IRepositorioConta repositorioConta;
     private readonly IRepositorioMesa repositorioMesa;
 
-    public MesaController()
+    public MesaController(IRepositorioConta repositorioConta, IRepositorioMesa repositorioMesa)
     {
-        contextoDados = new(true);
-        repositorioConta = new RepositorioContaEmArquivo(contextoDados);
-        repositorioMesa = new RepositorioMesaEmArquivo(contextoDados);
+        this.repositorioConta = repositorioConta;
+        this.repositorioMesa = repositorioMesa;
     }
 
     [HttpGet]

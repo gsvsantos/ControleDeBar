@@ -1,6 +1,4 @@
 ﻿using ControleDeBar.Dominio.ModuloGarcom;
-using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
-using ControleDeBar.Infraestrutura.Arquivos.ModuloGarcom;
 using ControleDeBar.WebApp.Extensions;
 using ControleDeBar.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +8,11 @@ namespace ControleDeBar.WebApp.Controllers;
 [Route("garcons")]
 public class GarcomController : Controller
 {
-    private readonly ContextoDados contextoDados;
     private readonly IRepositorioGarcom repositorioGarcom;
 
-    public GarcomController()
+    public GarcomController(IRepositorioGarcom repositorioGarcom)
     {
-        contextoDados = new(true);
-        repositorioGarcom = new RepositorioGarcomEmArquivo(contextoDados);
+        this.repositorioGarcom = repositorioGarcom;
     }
 
     [HttpGet]
