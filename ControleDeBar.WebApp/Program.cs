@@ -34,7 +34,7 @@ namespace ControleDeBar.WebApp
 
             string caminhoAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-            string caminhoArquivo = Path.Combine(caminhoAppData, "eAgenda", "erro.log");
+            string caminhoArquivo = Path.Combine(caminhoAppData, "Controle-de-Bar", "erro.log");
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
