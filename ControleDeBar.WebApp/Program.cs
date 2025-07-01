@@ -4,9 +4,9 @@ using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.Dominio.ModuloProduto;
 using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
 using ControleDeBar.Infraestrutura.Arquivos.ModuloConta;
-using ControleDeBar.Infraestrutura.Arquivos.ModuloGarcom;
 using ControleDeBar.Infraestrutura.Arquivos.ModuloMesa;
 using ControleDeBar.Infraestrutura.Arquivos.ModuloProduto;
+using ControleDeBar.Infraestrutura.SQLServer.ModuloGarcom;
 using ControleDeBar.WebApp.ActionFilters;
 using Serilog;
 using Serilog.Events;
@@ -28,7 +28,7 @@ namespace ControleDeBar.WebApp
             });
             builder.Services.AddScoped((IServiceProvider _) => new ContextoDados(true));
             builder.Services.AddScoped<IRepositorioConta, RepositorioContaEmArquivo>();
-            builder.Services.AddScoped<IRepositorioGarcom, RepositorioGarcomEmArquivo>();
+            builder.Services.AddScoped<IRepositorioGarcom, RepositorioGarcomSQL>();
             builder.Services.AddScoped<IRepositorioMesa, RepositorioMesaEmArquivo>();
             builder.Services.AddScoped<IRepositorioProduto, RepositorioProdutoEmArquivo>();
 
