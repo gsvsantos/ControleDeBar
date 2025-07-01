@@ -59,7 +59,7 @@ public class GarcomController : Controller
     [HttpGet("editar/{id:guid}")]
     public IActionResult Editar(Guid id)
     {
-        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id);
+        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id)!;
 
         EditarGarcomViewModel editarVM = new(
             garcomSelecionado.Id,
@@ -96,7 +96,7 @@ public class GarcomController : Controller
     [HttpGet("excluir/{id:guid}")]
     public IActionResult Excluir(Guid id)
     {
-        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id);
+        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id)!;
 
         ExcluirGarcomViewModel excluirVM = new(
             id,
