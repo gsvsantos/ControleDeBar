@@ -59,11 +59,11 @@ public class RepositorioProdutoSQL : IRepositorioProduto
 
         ConfigurarParametrosProduto(registroEditado, comandoEdicao);
 
-        int linhaAfetadas = comandoEdicao.ExecuteNonQuery();
+        int linhasAfetadas = comandoEdicao.ExecuteNonQuery();
 
         conexaoComBanco.Close();
 
-        return linhaAfetadas >= 1;
+        return linhasAfetadas >= 1;
     }
 
     public bool ExcluirRegistro(Guid idRegistro)
@@ -81,11 +81,11 @@ public class RepositorioProdutoSQL : IRepositorioProduto
 
         comandoExclusao.Parameters.AddWithValue("ID", idRegistro);
 
-        int linhaAfetadas = comandoExclusao.ExecuteNonQuery();
+        int linhasAfetadas = comandoExclusao.ExecuteNonQuery();
 
         conexaoComBanco.Close();
 
-        return linhaAfetadas >= 1;
+        return linhasAfetadas >= 1;
     }
 
     public Produto? SelecionarRegistroPorId(Guid idRegistro)

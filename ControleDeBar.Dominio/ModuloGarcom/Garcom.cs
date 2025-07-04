@@ -12,7 +12,6 @@ public class Garcom : EntidadeBase<Garcom>
         Nome = nome;
         CPF = cPF;
     }
-
     public Garcom(Guid id, string nome, string cPF) : this(nome, cPF)
     {
         Id = id;
