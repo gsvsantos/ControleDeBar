@@ -62,7 +62,7 @@ public class ProdutoController : Controller
     [HttpGet("editar/{id:guid}")]
     public IActionResult Editar(Guid id)
     {
-        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id);
+        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id)!;
 
         EditarProdutoViewModel editarVM = new(
             id,
@@ -101,7 +101,7 @@ public class ProdutoController : Controller
     [HttpGet("excluir/{id:guid}")]
     public IActionResult Excluir(Guid id)
     {
-        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id);
+        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id)!;
 
         ExcluirProdutoViewModel excluirVM = new(
             id,
