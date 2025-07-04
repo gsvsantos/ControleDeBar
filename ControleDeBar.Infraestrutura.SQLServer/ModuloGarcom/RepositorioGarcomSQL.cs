@@ -28,11 +28,11 @@ public class RepositorioGarcomSQL : IRepositorioGarcom
 
         SqlConnection conexaoComBanco = new(connectionString);
 
+        conexaoComBanco.Open();
+
         SqlCommand comandoCadastrar = new(sqlCadastrar, conexaoComBanco);
 
         ConfigurarParametrosGarcom(novoRegistro, comandoCadastrar);
-
-        conexaoComBanco.Open();
 
         comandoCadastrar.ExecuteReader();
 
@@ -51,13 +51,13 @@ public class RepositorioGarcomSQL : IRepositorioGarcom
 
         SqlConnection conexaoComBanco = new(connectionString);
 
+        conexaoComBanco.Open();
+
         SqlCommand comandoEditar = new(sqlEditar, conexaoComBanco);
 
         registroEditado.Id = idRegistro;
 
         ConfigurarParametrosGarcom(registroEditado, comandoEditar);
-
-        conexaoComBanco.Open();
 
         int linhasAfetadas = comandoEditar.ExecuteNonQuery();
 
@@ -75,11 +75,11 @@ public class RepositorioGarcomSQL : IRepositorioGarcom
 
         SqlConnection conexaoComBanco = new(connectionString);
 
+        conexaoComBanco.Open();
+
         SqlCommand comandoExclusao = new(sqlEditar, conexaoComBanco);
 
         comandoExclusao.Parameters.AddWithValue("ID", idRegistro);
-
-        conexaoComBanco.Open();
 
         int linhasAfetadas = comandoExclusao.ExecuteNonQuery();
 
@@ -102,11 +102,11 @@ public class RepositorioGarcomSQL : IRepositorioGarcom
 
         SqlConnection conexaoComBanco = new(connectionString);
 
+        conexaoComBanco.Open();
+
         SqlCommand comandoSelecaoPorId = new(sqlSelecionarPorId, conexaoComBanco);
 
         comandoSelecaoPorId.Parameters.AddWithValue("ID", idRegistro);
-
-        conexaoComBanco.Open();
 
         SqlDataReader leitor = comandoSelecaoPorId.ExecuteReader();
 
@@ -151,20 +151,19 @@ public class RepositorioGarcomSQL : IRepositorioGarcom
         return garcons;
     }
 
+    private Garcom ConverterParaGarcom(SqlDataReader leitor)
+    {
+        return new(
+            Guid.Parse(leitor["ID"].ToString()!),
+            Convert.ToString(leitor["NOME"])!,
+            Convert.ToString(leitor["CPF"])!
+            );
+    }
+
     public void ConfigurarParametrosGarcom(Garcom garcom, SqlCommand comando)
     {
         comando.Parameters.AddWithValue("ID", garcom.Id);
         comando.Parameters.AddWithValue("NOME", garcom.Nome);
         comando.Parameters.AddWithValue("CPF", garcom.CPF);
-    }
-
-    private Garcom ConverterParaGarcom(SqlDataReader leitor)
-    {
-        return new(
-            Convert.ToString(leitor["NOME"])!,
-            Convert.ToString(leitor["CPF"])!)
-        {
-            Id = Guid.Parse(leitor["ID"].ToString()!)
-        };
     }
 }
