@@ -60,22 +60,29 @@ public class ContaController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Abrir(AbrirContaViewModel abrirVM)
     {
-        foreach (Conta c in repositorioConta.SelecionarRegistros())
-        {
-            if (c.Titular.Equals(abrirVM.Titular) && c.EstaAberta)
-            {
-                ModelState.AddModelError("CadastroUnico", "Já existe uma conta aberta para este titular.");
-                break;
-            }
-        }
-
-        if (!ModelState.IsValid)
-            return View(abrirVM);
-
         List<Mesa> mesas = repositorioMesa.SelecionarRegistros();
         List<Garcom> garcons = repositorioGarcom.SelecionarRegistros();
 
         Conta novaConta = abrirVM.ParaEntidade(mesas, garcons);
+
+        foreach (Conta c in repositorioConta.SelecionarRegistros())
+        {
+            if (c.Titular.Equals(abrirVM.Titular) && c.EstaAberta)
+            {
+                ModelState.AddModelError("ConflitoAbrirConta", "Já existe uma conta aberta para este titular.");
+                break;
+            }
+        }
+
+        if (repositorioMesa.VerificarMesaCheia(novaConta.Mesa, repositorioConta.SelecionarContasAbertas()))
+            ModelState.AddModelError("ConflitoAbrirConta", "Esta mesa está cheia!");
+
+        if (!ModelState.IsValid)
+        {
+            return View("Abrir", new AbrirContaViewModel(
+            mesas,
+            garcons));
+        }
 
         repositorioConta.CadastrarRegistro(novaConta);
         repositorioMesa.OcuparMesa(novaConta.Mesa);

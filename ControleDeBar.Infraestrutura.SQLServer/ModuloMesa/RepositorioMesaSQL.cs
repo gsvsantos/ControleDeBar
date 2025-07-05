@@ -1,4 +1,5 @@
-﻿using ControleDeBar.Dominio.ModuloMesa;
+﻿using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Dominio.ModuloMesa;
 using Microsoft.Data.SqlClient;
 
 namespace ControleDeBar.Infraestrutura.SQLServer.ModuloMesa;
@@ -154,6 +155,11 @@ public class RepositorioMesaSQL : IRepositorioMesa
         conexaoComBanco.Close();
 
         return mesas;
+    }
+
+    public bool VerificarMesaCheia(Mesa mesa, List<Conta> contasAbertas)
+    {
+        return mesa.EstaOcupada && contasAbertas.Count(c => c.Mesa.Id == mesa.Id) == mesa.Capacidade;
     }
 
     public void OcuparMesa(Mesa mesa)

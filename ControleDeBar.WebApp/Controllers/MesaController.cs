@@ -65,7 +65,7 @@ public class MesaController : Controller
     [HttpGet("detalhes/{id:guid}")]
     public ActionResult Detalhes(Guid id)
     {
-        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id);
+        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id)!;
         List<Conta> contas = repositorioConta.SelecionarRegistros();
 
         DetalhesMesaViewModel detalhesVM = new(
@@ -80,7 +80,7 @@ public class MesaController : Controller
     [HttpGet("editar/{id:guid}")]
     public IActionResult Editar(Guid id)
     {
-        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id);
+        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id)!;
 
         EditarMesaViewModel editarVM = new(
             mesaSelecionada.Id,
@@ -119,7 +119,7 @@ public class MesaController : Controller
     [HttpGet("excluir/{id:guid}")]
     public IActionResult Excluir(Guid id)
     {
-        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id);
+        Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id)!;
 
         ExcluirMesaViewModel excluirVM = new(
             id,
