@@ -1,11 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using ControleDeBar.Dominio.ModuloProduto;
+﻿using ControleDeBar.Dominio.ModuloProduto;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeBar.Dominio.ModuloConta;
 
 public class Pedido
 {
     public Guid Id { get; set; }
+    public Conta Conta { get; set; } = null!;
     public Produto Produto { get; set; } = null!;
     public int QuantidadeSolicitada { get; set; }
 

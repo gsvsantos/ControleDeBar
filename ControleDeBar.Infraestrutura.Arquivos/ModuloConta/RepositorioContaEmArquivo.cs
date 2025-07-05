@@ -62,10 +62,25 @@ public class RepositorioContaEmArquivo : RepositorioBaseEmArquivo<Conta>, IRepos
 
         foreach (Conta c in registros)
         {
-            if (c.Fechamento.Date == data.Date)
+            if (c.Fechamento == data.Date)
                 contasPeriodo.Add(c);
         }
 
         return contasPeriodo;
+    }
+
+    public void AdicionarPedido(Conta conta, Pedido pedido)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoverPedido(Conta conta, Pedido pedido)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void FecharConta(Conta conta)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,6 +1,4 @@
 ﻿using ControleDeBar.Dominio.ModuloGarcom;
-using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
-using ControleDeBar.Infraestrutura.Arquivos.ModuloGarcom;
 using ControleDeBar.WebApp.Extensions;
 using ControleDeBar.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +8,11 @@ namespace ControleDeBar.WebApp.Controllers;
 [Route("garcons")]
 public class GarcomController : Controller
 {
-    private readonly ContextoDados contextoDados;
     private readonly IRepositorioGarcom repositorioGarcom;
 
-    public GarcomController()
+    public GarcomController(IRepositorioGarcom repositorioGarcom)
     {
-        contextoDados = new(true);
-        repositorioGarcom = new RepositorioGarcomEmArquivo(contextoDados);
+        this.repositorioGarcom = repositorioGarcom;
     }
 
     [HttpGet]
@@ -63,7 +59,7 @@ public class GarcomController : Controller
     [HttpGet("editar/{id:guid}")]
     public IActionResult Editar(Guid id)
     {
-        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id);
+        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id)!;
 
         EditarGarcomViewModel editarVM = new(
             garcomSelecionado.Id,
@@ -100,7 +96,7 @@ public class GarcomController : Controller
     [HttpGet("excluir/{id:guid}")]
     public IActionResult Excluir(Guid id)
     {
-        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id);
+        Garcom garcomSelecionado = repositorioGarcom.SelecionarRegistroPorId(id)!;
 
         ExcluirGarcomViewModel excluirVM = new(
             id,

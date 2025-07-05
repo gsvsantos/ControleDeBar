@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Dominio", "Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Infraestrutura", "03-Infraestrutura", "{9842BF66-DA2E-4910-BA96-0175E1499D01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Infraestrutura.Arquivos", "ControleDeBar.Infraestrutura.Arquivos\ControleDeBar.Infraestrutura.Arquivos.csproj", "{13A0B93D-F05B-4292-A710-F8BA831DF775}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeBar.Infraestrutura.SQLServer", "ControleDeBar.Infraestrutura.SQLServer\ControleDeBar.Infraestrutura.SQLServer.csproj", "{D8965AD0-4A2A-45C8-88B7-FC7D34D98470}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{B1821EAA-22D3-49BD-99F3-3383865887C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1821EAA-22D3-49BD-99F3-3383865887C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1821EAA-22D3-49BD-99F3-3383865887C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13A0B93D-F05B-4292-A710-F8BA831DF775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13A0B93D-F05B-4292-A710-F8BA831DF775}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13A0B93D-F05B-4292-A710-F8BA831DF775}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13A0B93D-F05B-4292-A710-F8BA831DF775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8965AD0-4A2A-45C8-88B7-FC7D34D98470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8965AD0-4A2A-45C8-88B7-FC7D34D98470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8965AD0-4A2A-45C8-88B7-FC7D34D98470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8965AD0-4A2A-45C8-88B7-FC7D34D98470}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,7 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DA3DB895-9456-432C-A4F8-B734F8F9B8EF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{B1821EAA-22D3-49BD-99F3-3383865887C5} = {FA33D128-7180-4D19-8FA2-4BA31700494C}
-		{13A0B93D-F05B-4292-A710-F8BA831DF775} = {9842BF66-DA2E-4910-BA96-0175E1499D01}
+		{D8965AD0-4A2A-45C8-88B7-FC7D34D98470} = {9842BF66-DA2E-4910-BA96-0175E1499D01}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3F77384-A1A7-43D7-86FA-DC2C0734822D}

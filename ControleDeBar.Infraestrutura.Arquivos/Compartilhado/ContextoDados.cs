@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloGarcom;
@@ -10,31 +9,19 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
 
 public class ContextoDados
 {
-    public List<Mesa> Mesas { get; set; }
-    public List<Garcom> Garcons { get; set; }
-    public List<Produto> Produtos { get; set; }
     public List<Conta> Contas { get; set; }
+    public List<Garcom> Garcons { get; set; }
+    public List<Mesa> Mesas { get; set; }
+    public List<Produto> Produtos { get; set; }
     private string pastaArmazenamento = string.Empty;
-    private string arquivoArmazenamento = "dados-controle-de-bar.json";
+    private readonly string arquivoArmazenamento = "dados-controle-de-bar.json";
 
     public ContextoDados()
     {
-        Mesas = new List<Mesa>();
-        Garcons = new List<Garcom>();
-        Produtos = new List<Produto>();
-        Contas = new List<Conta>();
-    }
-
-    public void VerificarSistemaOperacional()
-    {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            pastaArmazenamento = @"C:\temp";
-        }
-        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-        {
-            pastaArmazenamento = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "temp");
-        }
+        Contas = [];
+        Garcons = [];
+        Mesas = [];
+        Produtos = [];
     }
 
     public ContextoDados(bool carregarDados) : this()
@@ -43,19 +30,27 @@ public class ContextoDados
             Carregar();
     }
 
+    public void VerificarSistemaOperacional()
+    {
+        pastaArmazenamento = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "Controle-de-Bar");
+    }
+
     public void Salvar()
     {
         VerificarSistemaOperacional();
         string caminhoCompleto = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
 
-        JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
-        jsonOptions.WriteIndented = true;
-        jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
-
-        string json = JsonSerializer.Serialize(this, jsonOptions);
-
         if (!Directory.Exists(pastaArmazenamento))
             Directory.CreateDirectory(pastaArmazenamento);
+
+        JsonSerializerOptions jsonOptions = new()
+        {
+            WriteIndented = true,
+            ReferenceHandler = ReferenceHandler.Preserve
+        };
+
+        string json = JsonSerializer.Serialize(this, jsonOptions);
 
         File.WriteAllText(caminhoCompleto, json);
     }
@@ -74,7 +69,7 @@ public class ContextoDados
         JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
         jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
 
-        ContextoDados contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(json, jsonOptions)!;
+        ContextoDados? contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(json, jsonOptions);
 
         if (contextoArmazenado == null) return;
 

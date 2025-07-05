@@ -1,6 +1,4 @@
 ﻿using ControleDeBar.Dominio.ModuloProduto;
-using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
-using ControleDeBar.Infraestrutura.Arquivos.ModuloProduto;
 using ControleDeBar.WebApp.Extensions;
 using ControleDeBar.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +8,11 @@ namespace ControleDeBar.WebApp.Controllers;
 [Route("produtos")]
 public class ProdutoController : Controller
 {
-    private readonly ContextoDados contextoDados;
     private readonly IRepositorioProduto repositorioProduto;
 
-    public ProdutoController()
+    public ProdutoController(IRepositorioProduto repositorioProduto)
     {
-        contextoDados = new(true);
-        repositorioProduto = new RepositorioProdutoEmArquivo(contextoDados);
+        this.repositorioProduto = repositorioProduto;
     }
 
     [HttpGet]
@@ -66,7 +62,7 @@ public class ProdutoController : Controller
     [HttpGet("editar/{id:guid}")]
     public IActionResult Editar(Guid id)
     {
-        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id);
+        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id)!;
 
         EditarProdutoViewModel editarVM = new(
             id,
@@ -105,7 +101,7 @@ public class ProdutoController : Controller
     [HttpGet("excluir/{id:guid}")]
     public IActionResult Excluir(Guid id)
     {
-        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id);
+        Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id)!;
 
         ExcluirProdutoViewModel excluirVM = new(
             id,

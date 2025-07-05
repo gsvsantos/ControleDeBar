@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using ControleDeBar.Dominio.ModuloConta;
+﻿using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.WebApp.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeBar.WebApp.Models;
 
@@ -14,7 +14,7 @@ public abstract class FormularioMesaViewModel
     public int Numero { get; set; } = 1;
 
     [Required(ErrorMessage = "Capacidade é obrigatória")]
-    [Range(0, 4, ErrorMessage = "O número deve ser um número entre 0 e 4")]
+    [Range(0, 100, ErrorMessage = "O número deve ser um número entre 0 e 100")]
     public int Capacidade { get; set; }
 }
 

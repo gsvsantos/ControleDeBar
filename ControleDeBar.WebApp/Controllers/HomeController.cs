@@ -8,4 +8,10 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    [HttpGet("erro")]
+    public IActionResult Erro()
+    {
+        return View();
+    }
 }

@@ -1,8 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using ControleDeBar.Dominio.Compartilhado;
+﻿using ControleDeBar.Dominio.Compartilhado;
 using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.Dominio.ModuloProduto;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeBar.Dominio.ModuloConta;
 
@@ -12,8 +12,9 @@ public class Conta : EntidadeBase<Conta>
     public Mesa Mesa { get; set; } = null!;
     public Garcom Garcom { get; set; } = null!;
     public DateTime Abertura { get; set; }
-    public DateTime Fechamento { get; set; }
+    public DateTime? Fechamento { get; set; }
     public bool EstaAberta { get; set; }
+    public decimal ValorTotal { get; set; }
     public List<Pedido> Pedidos { get; set; } = [];
 
     [ExcludeFromCodeCoverage]
@@ -32,16 +33,12 @@ public class Conta : EntidadeBase<Conta>
     {
         EstaAberta = true;
         Abertura = DateTime.Now;
-
-        Mesa.Ocupar();
     }
 
     public void Fechar()
     {
         EstaAberta = false;
         Fechamento = DateTime.Now;
-
-        Mesa.Desocupar();
     }
 
     public Pedido RegistrarPedido(Produto produto, int quantidadeSolicitada)
@@ -62,13 +59,7 @@ public class Conta : EntidadeBase<Conta>
 
     public Pedido RemoverPedido(Guid idPedido)
     {
-        Pedido pedidoSelecionado = null!;
-
-        foreach (Pedido p in Pedidos)
-        {
-            if (p.Id == idPedido)
-                pedidoSelecionado = p;
-        }
+        Pedido pedidoSelecionado = Pedidos.FirstOrDefault(p => p.Id == idPedido)!;
 
         if (pedidoSelecionado == null)
             return null!;
