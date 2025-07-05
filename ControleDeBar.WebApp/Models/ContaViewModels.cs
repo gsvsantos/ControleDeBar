@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using ControleDeBar.Dominio.ModuloConta;
+﻿using ControleDeBar.Dominio.ModuloConta;
 using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.Dominio.ModuloProduto;
 using ControleDeBar.WebApp.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeBar.WebApp.Models;
 
@@ -100,12 +100,12 @@ public class DetalhesContaViewModel
     public int Mesa { get; set; }
     public string Garcom { get; set; }
     public DateTime Abertura { get; set; }
-    public DateTime Fechamento { get; set; }
+    public DateTime? Fechamento { get; set; }
     public bool EstaAberta { get; set; }
     public decimal ValorTotal { get; set; }
     public List<PedidoContaViewModel> Pedidos { get; set; } = [];
 
-    public DetalhesContaViewModel(Guid id, string titular, int mesa, string garcom, DateTime abertura, DateTime fechamento, bool estaAberta, decimal valorTotal, List<Pedido> pedidos)
+    public DetalhesContaViewModel(Guid id, string titular, int mesa, string garcom, DateTime abertura, DateTime? fechamento, bool estaAberta, decimal valorTotal, List<Pedido> pedidos)
     {
         Id = id;
         Titular = titular;

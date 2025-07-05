@@ -13,11 +13,12 @@ public class Mesa : EntidadeBase<Mesa>
         Numero = numero;
         Capacidade = capacidade;
     }
-    public Mesa(Guid id, int numero, int capacidade) : this(numero, capacidade)
+    public Mesa(Guid id, int numero, int capacidade, bool estaOcupada) : this(numero, capacidade)
     {
         Id = id;
         Numero = numero;
         Capacidade = capacidade;
+        EstaOcupada = estaOcupada;
     }
 
     public void Ocupar()

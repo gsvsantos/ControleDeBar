@@ -17,13 +17,15 @@ public class RepositorioMesaSQL : IRepositorioMesa
             (
                 [ID],
                 [NUMERO],
-                [CAPACIDADE]
+                [CAPACIDADE],
+                [ESTAOCUPADA]
             )
             VALUES
             (
                 @ID,
                 @NUMERO,
-                @CAPACIDADE
+                @CAPACIDADE,
+                @ESTAOCUPADA
             )";
 
         SqlConnection conexaoComBanco = new(connectionString);
@@ -96,7 +98,8 @@ public class RepositorioMesaSQL : IRepositorioMesa
             @"SELECT
                 [ID],
                 [NUMERO],
-                [CAPACIDADE]
+                [CAPACIDADE],
+                [ESTAOCUPADA]
             FROM
                 [TBMESA]
             WHERE
@@ -128,7 +131,8 @@ public class RepositorioMesaSQL : IRepositorioMesa
             @"SELECT
                 [ID],
                 [NUMERO],
-                [CAPACIDADE]
+                [CAPACIDADE],
+                [ESTAOCUPADA]
             FROM
                 [TBMESA]";
 
@@ -152,12 +156,63 @@ public class RepositorioMesaSQL : IRepositorioMesa
         return mesas;
     }
 
+    public void OcuparMesa(Mesa mesa)
+    {
+        mesa.Ocupar();
+
+        const string sqlFecharConta =
+            @"UPDATE [TBMESA]
+            SET
+                [ESTAOCUPADA] = @ESTAOCUPADA
+            WHERE
+                [ID] = @ID";
+
+        SqlConnection conexaoComBanco = new(connectionString);
+
+        conexaoComBanco.Open();
+
+        SqlCommand comandoFechamento = new(sqlFecharConta, conexaoComBanco);
+
+        comandoFechamento.Parameters.AddWithValue("ID", mesa.Id);
+        comandoFechamento.Parameters.AddWithValue("ESTAOCUPADA", mesa.EstaOcupada);
+
+        comandoFechamento.ExecuteNonQuery();
+
+        conexaoComBanco.Close();
+    }
+
+    public void DesocuparMesa(Mesa mesa)
+    {
+        mesa.Desocupar();
+
+        const string sqlFecharConta =
+            @"UPDATE [TBMESA]
+            SET
+                [ESTAOCUPADA] = @ESTAOCUPADA
+            WHERE
+                [ID] = @ID";
+
+        SqlConnection conexaoComBanco = new(connectionString);
+
+        conexaoComBanco.Open();
+
+        SqlCommand comandoFechamento = new(sqlFecharConta, conexaoComBanco);
+
+        comandoFechamento.Parameters.AddWithValue("ID", mesa.Id);
+        comandoFechamento.Parameters.AddWithValue("ESTAOCUPADA", mesa.EstaOcupada);
+
+        comandoFechamento.ExecuteNonQuery();
+
+        conexaoComBanco.Close();
+    }
+
     private Mesa ConverterParaMesa(SqlDataReader leitor)
     {
         return new(
             Guid.Parse(leitor["ID"].ToString()!),
             Convert.ToInt32(leitor["NUMERO"]),
-            Convert.ToInt32(leitor["CAPACIDADE"])
+            Convert.ToInt32(leitor["CAPACIDADE"]),
+            Convert.ToBoolean(leitor["ESTAOCUPADA"])
             );
     }
 
@@ -166,5 +221,6 @@ public class RepositorioMesaSQL : IRepositorioMesa
         comando.Parameters.AddWithValue("ID", mesa.Id);
         comando.Parameters.AddWithValue("NUMERO", mesa.Numero);
         comando.Parameters.AddWithValue("CAPACIDADE", mesa.Capacidade);
+        comando.Parameters.AddWithValue("ESTAOCUPADA", mesa.EstaOcupada);
     }
 }
