@@ -30,11 +30,11 @@ public class RepositorioGarcomSQL : IRepositorioGarcom
 
         conexaoComBanco.Open();
 
-        SqlCommand comandoCadastrar = new(sqlCadastrar, conexaoComBanco);
+        SqlCommand comandoCadastro = new(sqlCadastrar, conexaoComBanco);
 
-        ConfigurarParametrosGarcom(novoRegistro, comandoCadastrar);
+        ConfigurarParametrosGarcom(novoRegistro, comandoCadastro);
 
-        comandoCadastrar.ExecuteReader();
+        comandoCadastro.ExecuteNonQuery();
 
         conexaoComBanco.Close();
     }

@@ -30,11 +30,11 @@ public class RepositorioProdutoSQL : IRepositorioProduto
 
         conexaoComBanco.Open();
 
-        SqlCommand comandoCadastrar = new(sqlCadastrar, conexaoComBanco);
+        SqlCommand comandoCadastro = new(sqlCadastrar, conexaoComBanco);
 
-        ConfigurarParametrosProduto(novoRegistro, comandoCadastrar);
+        ConfigurarParametrosProduto(novoRegistro, comandoCadastro);
 
-        comandoCadastrar.ExecuteReader();
+        comandoCadastro.ExecuteNonQuery();
 
         conexaoComBanco.Close();
     }
