@@ -1,4 +1,5 @@
-﻿using ControleDeBar.Dominio.ModuloGarcom;
+﻿using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.WebApp.Extensions;
 using ControleDeBar.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ namespace ControleDeBar.WebApp.Controllers;
 [Route("garcons")]
 public class GarcomController : Controller
 {
+    private readonly IRepositorioConta repositorioConta;
     private readonly IRepositorioGarcom repositorioGarcom;
 
-    public GarcomController(IRepositorioGarcom repositorioGarcom)
+    public GarcomController(IRepositorioConta repositorioConta, IRepositorioGarcom repositorioGarcom)
     {
+        this.repositorioConta = repositorioConta;
         this.repositorioGarcom = repositorioGarcom;
     }
 
@@ -70,6 +73,7 @@ public class GarcomController : Controller
     }
 
     [HttpPost("editar/{id:guid}")]
+    [ValidateAntiForgeryToken]
     public IActionResult Editar(Guid id, EditarGarcomViewModel editarVM)
     {
         foreach (Garcom garcom in repositorioGarcom.SelecionarRegistros())
@@ -108,6 +112,20 @@ public class GarcomController : Controller
     [HttpPost("excluir/{id:guid}")]
     public IActionResult ExcluirConfirmado(Guid id)
     {
+        List<Conta> contas = repositorioConta.SelecionarRegistros();
+
+        if (repositorioGarcom.GarcomContemVinculos(id, contas))
+        {
+            ModelState.AddModelError("ConflitosVinculos", "Este gar~çom contém registros e não pode ser excluído.");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            Garcom garcomSelecionada = repositorioGarcom.SelecionarRegistroPorId(id)!;
+
+            return View(nameof(Excluir), new ExcluirGarcomViewModel(id, garcomSelecionada.Nome));
+        }
+
         repositorioGarcom.ExcluirRegistro(id);
 
         return RedirectToAction(nameof(Index));

@@ -9,6 +9,14 @@
         <div class="card-body p-md-5">
             <h3>Formulário de Exclusão</h3>
 
+            @if (ViewData.ModelState["ConflitosVinculos"]?.Errors.Count > 0)
+            {
+                <div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+                    @ViewData.ModelState["ConflitosVinculos"]!.Errors.First().ErrorMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
             <p class="mt-4">Você deseja realmente excluir o cadastro do '@Model.Nome'?</p>
 
             <form action="/garcons/excluir/@Model.Id" method="post">

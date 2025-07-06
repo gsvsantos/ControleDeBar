@@ -1,4 +1,5 @@
-﻿using ControleDeBar.Dominio.ModuloGarcom;
+﻿using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Dominio.ModuloGarcom;
 using Microsoft.Data.SqlClient;
 
 namespace ControleDeBar.Infraestrutura.SQLServer.ModuloGarcom;
@@ -151,6 +152,11 @@ public class RepositorioGarcomSQL : IRepositorioGarcom
         return garcons;
     }
 
+    public bool GarcomContemVinculos(Guid garcomId, List<Conta> contas)
+    {
+        return contas.Any(c => c.Garcom.Id == garcomId);
+    }
+
     private Garcom ConverterParaGarcom(SqlDataReader leitor)
     {
         return new(
@@ -160,7 +166,7 @@ public class RepositorioGarcomSQL : IRepositorioGarcom
             );
     }
 
-    public void ConfigurarParametrosGarcom(Garcom garcom, SqlCommand comando)
+    private void ConfigurarParametrosGarcom(Garcom garcom, SqlCommand comando)
     {
         comando.Parameters.AddWithValue("ID", garcom.Id);
         comando.Parameters.AddWithValue("NOME", garcom.Nome);
