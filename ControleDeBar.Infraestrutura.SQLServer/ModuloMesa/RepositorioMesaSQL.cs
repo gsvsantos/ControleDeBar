@@ -89,8 +89,6 @@ public class RepositorioMesaSQL : IRepositorioMesa
         conexaoComBanco.Close();
 
         return linhasAfetadas >= 1;
-
-
     }
 
     public Mesa? SelecionarRegistroPorId(Guid idRegistro)
@@ -210,6 +208,11 @@ public class RepositorioMesaSQL : IRepositorioMesa
         comandoFechamento.ExecuteNonQuery();
 
         conexaoComBanco.Close();
+    }
+
+    public bool MesaContemVinculos(Guid mesaId, List<Conta> contas)
+    {
+        return contas.Any(c => c.Mesa.Id == mesaId);
     }
 
     private Mesa ConverterParaMesa(SqlDataReader leitor)

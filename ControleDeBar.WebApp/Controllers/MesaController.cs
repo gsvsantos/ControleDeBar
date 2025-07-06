@@ -131,6 +131,20 @@ public class MesaController : Controller
     [HttpPost("excluir/{id:guid}")]
     public IActionResult ExcluirConfirmado(Guid id)
     {
+        List<Conta> contas = repositorioConta.SelecionarRegistros();
+
+        if (repositorioMesa.MesaContemVinculos(id, contas))
+        {
+            ModelState.AddModelError("ConflitosVinculos", "Esta mesa contém registros e não pode ser excluída.");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            Mesa mesaSelecionada = repositorioMesa.SelecionarRegistroPorId(id)!;
+
+            return View(nameof(Excluir), new ExcluirMesaViewModel(id, mesaSelecionada.Numero));
+        }
+
         repositorioMesa.ExcluirRegistro(id);
 
         return RedirectToAction(nameof(Index));
