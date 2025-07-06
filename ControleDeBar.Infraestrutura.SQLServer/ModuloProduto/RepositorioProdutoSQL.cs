@@ -1,4 +1,5 @@
-﻿using ControleDeBar.Dominio.ModuloProduto;
+﻿using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Dominio.ModuloProduto;
 using Microsoft.Data.SqlClient;
 
 namespace ControleDeBar.Infraestrutura.SQLServer.ModuloProduto;
@@ -148,6 +149,11 @@ public class RepositorioProdutoSQL : IRepositorioProduto
         conexaoComBanco.Close();
 
         return produtos;
+    }
+
+    public bool ProdutoContemVinculos(Guid produtoId, List<Conta> contas)
+    {
+        return contas.Any(c => c.Pedidos.Any(p => p.Produto.Id == produtoId));
     }
 
     private Produto ConverterParaProduto(SqlDataReader leitor)

@@ -1,4 +1,5 @@
-﻿using ControleDeBar.Dominio.ModuloProduto;
+﻿using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Dominio.ModuloProduto;
 using ControleDeBar.WebApp.Extensions;
 using ControleDeBar.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ namespace ControleDeBar.WebApp.Controllers;
 [Route("produtos")]
 public class ProdutoController : Controller
 {
+    private readonly IRepositorioConta repositorioConta;
     private readonly IRepositorioProduto repositorioProduto;
 
-    public ProdutoController(IRepositorioProduto repositorioProduto)
+    public ProdutoController(IRepositorioConta repositorioConta, IRepositorioProduto repositorioProduto)
     {
+        this.repositorioConta = repositorioConta;
         this.repositorioProduto = repositorioProduto;
     }
 
@@ -113,6 +116,19 @@ public class ProdutoController : Controller
     [HttpPost("excluir/{id:guid}")]
     public IActionResult ExcluirConfirmado(Guid id)
     {
+        List<Conta> contas = repositorioConta.SelecionarRegistros();
+
+        if (repositorioProduto.ProdutoContemVinculos(id, contas))
+        {
+            ModelState.AddModelError("ConflitosVinculos", "Este produto contém registros e não pode ser excluído.");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(id)!;
+
+            return View(nameof(Excluir), new ExcluirProdutoViewModel(id, produtoSelecionado.Nome));
+        }
         repositorioProduto.ExcluirRegistro(id);
 
         return RedirectToAction(nameof(Index));
