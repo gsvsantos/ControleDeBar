@@ -164,7 +164,7 @@ public class RepositorioMesaSQL : IRepositorioMesa
     {
         mesa.Ocupar();
 
-        const string sqlFecharConta =
+        const string sqlOcuparMesa =
             @"UPDATE [TBMESA]
             SET
                 [ESTAOCUPADA] = @ESTAOCUPADA
@@ -175,12 +175,12 @@ public class RepositorioMesaSQL : IRepositorioMesa
 
         conexaoComBanco.Open();
 
-        SqlCommand comandoFechamento = new(sqlFecharConta, conexaoComBanco);
+        SqlCommand comandoAtualizacaoEstado = new(sqlOcuparMesa, conexaoComBanco);
 
-        comandoFechamento.Parameters.AddWithValue("ID", mesa.Id);
-        comandoFechamento.Parameters.AddWithValue("ESTAOCUPADA", mesa.EstaOcupada);
+        comandoAtualizacaoEstado.Parameters.AddWithValue("ID", mesa.Id);
+        comandoAtualizacaoEstado.Parameters.AddWithValue("ESTAOCUPADA", mesa.EstaOcupada);
 
-        comandoFechamento.ExecuteNonQuery();
+        comandoAtualizacaoEstado.ExecuteNonQuery();
 
         conexaoComBanco.Close();
     }
@@ -189,7 +189,7 @@ public class RepositorioMesaSQL : IRepositorioMesa
     {
         mesa.Desocupar();
 
-        const string sqlFecharConta =
+        const string sqlDesocuparMesa =
             @"UPDATE [TBMESA]
             SET
                 [ESTAOCUPADA] = @ESTAOCUPADA
@@ -200,12 +200,12 @@ public class RepositorioMesaSQL : IRepositorioMesa
 
         conexaoComBanco.Open();
 
-        SqlCommand comandoFechamento = new(sqlFecharConta, conexaoComBanco);
+        SqlCommand comandoAtualizacaoEstado = new(sqlDesocuparMesa, conexaoComBanco);
 
-        comandoFechamento.Parameters.AddWithValue("ID", mesa.Id);
-        comandoFechamento.Parameters.AddWithValue("ESTAOCUPADA", mesa.EstaOcupada);
+        comandoAtualizacaoEstado.Parameters.AddWithValue("ID", mesa.Id);
+        comandoAtualizacaoEstado.Parameters.AddWithValue("ESTAOCUPADA", mesa.EstaOcupada);
 
-        comandoFechamento.ExecuteNonQuery();
+        comandoAtualizacaoEstado.ExecuteNonQuery();
 
         conexaoComBanco.Close();
     }

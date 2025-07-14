@@ -562,12 +562,14 @@ public class RepositorioContaSQL : IRepositorioConta
 
         conexaoComBanco.Open();
 
-        SqlCommand comandoAtualizaValor = new(sqlAtualizarValorTotal, conexaoComBanco);
+        SqlCommand comandoAtualizacaoValor = new(sqlAtualizarValorTotal, conexaoComBanco);
 
-        comandoAtualizaValor.Parameters.AddWithValue("VALORTOTAL", conta.CalcularValorTotal());
-        comandoAtualizaValor.Parameters.AddWithValue("ID", conta.Id);
+        comandoAtualizacaoValor.Parameters.AddWithValue("VALORTOTAL", conta.CalcularValorTotal());
+        comandoAtualizacaoValor.Parameters.AddWithValue("ID", conta.Id);
 
-        comandoAtualizaValor.ExecuteNonQuery();
+        comandoAtualizacaoValor.ExecuteNonQuery();
+
+        conexaoComBanco.Close();
     }
 
     private Conta ConverterParaConta(SqlDataReader leitor)
