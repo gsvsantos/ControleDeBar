@@ -2,6 +2,10 @@
 
 Uma simples aplicação web para gestão de um bar, com funcionalidades como controle de pedidos, mesas, garçons e produtos.
 
+---
+
+[![wakatime](https://wakatime.com/badge/user/d66fe803-196c-4729-b330-f8a026db44ec/project/b8c56463-2e53-4441-b7f4-6ca1778794a5.svg)](https://wakatime.com/badge/user/d66fe803-196c-4729-b330-f8a026db44ec/project/b8c56463-2e53-4441-b7f4-6ca1778794a5)
+
 ## Funcionalidades
 
 - Cadastro de Mesas
