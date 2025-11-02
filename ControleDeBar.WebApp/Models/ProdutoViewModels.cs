@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using ControleDeBar.Dominio.ModuloProduto;
+﻿using ControleDeBar.Dominio.ModuloProduto;
 using ControleDeBar.WebApp.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeBar.WebApp.Models;
 
@@ -30,7 +30,7 @@ public class CadastrarProdutoViewModel : FormularioProdutoViewModel
 
 public class VisualizarProdutosViewModel
 {
-    public List<DetalhesProdutoViewModel> Registros { get; } = [];
+    public List<DetalhesProdutoViewModel> Registros { get; set; } = new List<DetalhesProdutoViewModel>();
     public VisualizarProdutosViewModel(List<Produto> produtos)
     {
         foreach (Produto p in produtos)
